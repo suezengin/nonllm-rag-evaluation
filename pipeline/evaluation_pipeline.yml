@@ -1,0 +1,42 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+experiment_name: evaluation-full
+
+inputs:
+  retrieval_predictions_uri:
+    type: uri_file
+    path: azureml:retrieval_predictions.json@latest
+
+  retrieval_ground_truth_uri:
+    type: uri_file
+    path: azureml:retrieval_ground_truth.csv@latest
+
+  generation_predictions_uri:
+    type: uri_file
+    path: azureml:generation_outputs.csv@latest
+
+  generation_ground_truth_uri:
+    type: uri_file
+    path: azureml:generation_ground_truth.csv@latest
+
+settings:
+  default_datastore: azureml:workspaceblobstore
+
+jobs:
+  evaluate_retrieval:
+    component: ../components/evaluation_component/evaluation_retrieval_component.yml
+    inputs:
+      predictions_uri: ${{parent.inputs.retrieval_predictions_uri}}
+      ground_truth_uri: ${{parent.inputs.retrieval_ground_truth_uri}}
+    outputs:
+      metrics_log:
+        mode: upload
+
+  evaluate_generation:
+    component: ../components/evaluation_component/evaluation_generation_component.yml
+    inputs:
+      predictions_uri: ${{parent.inputs.generation_predictions_uri}}
+      ground_truth_uri: ${{parent.inputs.generation_ground_truth_uri}}
+    outputs:
+      metrics_log:
+        mode: upload

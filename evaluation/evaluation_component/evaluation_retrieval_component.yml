@@ -1,0 +1,21 @@
+name: evaluation_retrieval
+display_name: Retrieval Evaluation Metrics
+type: command
+
+inputs:
+  predictions_uri:
+    type: uri_file
+  ground_truth_uri:
+    type: uri_file
+
+outputs:
+  metrics_log:
+    type: uri_file
+
+code: .
+environment: azureml://registries/azureml/environments/python-sdk-v2/versions/23
+command: >-
+  python retrieval_metrics.py
+  --predictions_uri ${{inputs.predictions_uri}}
+  --ground_truth_uri ${{inputs.ground_truth_uri}}
+  --metrics_log ${{outputs.metrics_log}}
