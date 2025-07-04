@@ -1,0 +1,4 @@
+-r src/environments/requirements.txt
+detect-secrets
+pre-commit
+ 
