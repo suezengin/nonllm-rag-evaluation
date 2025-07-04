@@ -33,7 +33,7 @@ rag_evaluation/
         └── run_retrieval_metrics.py
         └── run_retrieval_metrics_test_set.py 
 
-└── notebook/              # Notebooks for exploration and testing
+└── test_notebook/              # Notebooks for exploration and testing
 ```
 
 ---
