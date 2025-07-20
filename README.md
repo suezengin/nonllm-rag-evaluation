@@ -102,7 +102,3 @@ The repository includes:
 Feel free to open issues or submit pull requests to improve or extend this framework???
 
 ---
-
-## License
-
-This project is licensed under the MIT License.
